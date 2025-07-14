@@ -14,9 +14,14 @@ const products = [
 ];
 
 app.get('/api/products', (req, res) => {
-  const searchTerm = req.query.search?.toLowerCase() || '';
-  const filtered = products.filter(p => p.name.toLowerCase().includes(searchTerm));
-  res.json({ products: filtered });
+  try {
+    const searchTerm = req.query.search?.toLowerCase() || '';
+    const filtered = products.filter(p => p.name.toLowerCase().includes(searchTerm));
+    res.json({ products: filtered });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 });
 
 app.listen(PORT, () => {
