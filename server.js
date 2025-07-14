@@ -19,7 +19,6 @@ app.get('/api/products', (req, res) => {
     const filtered = products.filter(p => p.name.toLowerCase().includes(searchTerm));
     res.json({ products: filtered });
   } catch (error) {
-    console.error('Error:', error);
     res.status(500).json({ error: 'Something went wrong' });
   }
 });
